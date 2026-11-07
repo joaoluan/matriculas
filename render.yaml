@@ -1,5 +1,3 @@
-# Blueprint do Render: cria 2 servicos a partir deste mesmo repositorio.
-# No Render: New + -> Blueprint -> conectar este repo -> Apply.
 services:
   # ---------- BACK-END (Express + fs/dados.json) ----------
   - type: web
@@ -9,19 +7,14 @@ services:
     rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
-    # Obs.: no plano free o disco e temporario; o dados.json volta ao
-    # estado inicial quando o servico reinicia (otimo para demo).
 
   # ---------- FRONT-END (React build estatico) ----------
   - type: web
     name: matriculas-frontend
     runtime: static
-    plan: free
-    rootDir: .
     buildCommand: npm install && npm run build
     staticPublishPath: ./build
     envVars:
-      # pega automaticamente a URL do back-end acima
       - key: REACT_APP_API_URL
         fromService:
           name: matriculas-backend
