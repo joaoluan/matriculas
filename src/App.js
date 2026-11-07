@@ -109,9 +109,8 @@ class App extends Component {
             {/* renderizacao condicional: mensagem de erro de conexao */}
             {!carregando && erroCarregar && (
               <div className="alert alert-danger">
-                Nao foi possivel falar com o back-end ({erroCarregar}). Confira se o
-                servidor esta rodando em <code>http://localhost:3001</code>{" "}
-                (<code>cd backend &amp;&amp; node server.js</code>).
+                Nao foi possivel falar com o servidor ({erroCarregar}). Se for o primeiro
+                acesso, ele pode levar ate 1 minuto para iniciar. Aguarde e tente de novo.
                 <div className="mt-2">
                   <button className="btn btn-sm btn-outline-danger" onClick={this.recarregar}>
                     Tentar de novo
