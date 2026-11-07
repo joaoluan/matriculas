@@ -1,0 +1,20 @@
+{
+  "alunos": [
+    { "id": 1, "nome": "Ana Souza", "matricula": "2026001", "cursadas": [1] },
+    { "id": 2, "nome": "Bruno Lima", "matricula": "2026002", "cursadas": [] }
+  ],
+  "professores": [
+    { "id": 1, "nome": "Carla Dias", "email": "carla@uni.br", "cargaMaxima": 3 },
+    { "id": 2, "nome": "Diego Ramos", "email": "diego@uni.br", "cargaMaxima": 2 }
+  ],
+  "disciplinas": [
+    { "id": 1, "codigo": "ALG1", "nome": "Algoritmos I", "creditos": 4, "preRequisitos": [] },
+    { "id": 2, "codigo": "ALG2", "nome": "Algoritmos II", "creditos": 4, "preRequisitos": [1] },
+    { "id": 3, "codigo": "WEB", "nome": "Programação Front-end", "creditos": 4, "preRequisitos": [] }
+  ],
+  "turmas": [
+    { "id": 1, "disciplinaId": 2, "professorId": 1, "horario": "21", "vagas": 2, "semestre": "2026.2" },
+    { "id": 2, "disciplinaId": 3, "professorId": 2, "horario": "21", "vagas": 30, "semestre": "2026.2" }
+  ],
+  "matriculas": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "matriculas-backend",
+  "version": "1.0.0",
+  "description": "Back-end Express do Sistema de Matriculas (GET /dados + rotas POST com fs)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,86 @@
+===========================================================
+ SISTEMA DE MATRICULAS
+ Front-end React (componentes de classe) + Back-end Express
+===========================================================
+
+COMO RODAR (precisa de 2 terminais)
+-----------------------------------
+
+1) BACK-END (porta 3001)
+   cd backend
+   npm install
+   node server.js
+
+   Deve aparecer:
+   "Back-end do Sistema de Matriculas rodando em http://localhost:3001"
+
+2) FRONT-END (porta 3000) -- em OUTRO terminal, na raiz do projeto
+   npm install
+   npm start
+
+   O navegador abre em http://localhost:3000
+
+OBS: o front (3000) chama o back (3001) via fetch. Deixe os dois ligados.
+Os dados ficam no arquivo backend/dados.json (gravado com fs).
+
+
+PERFIS
+------
+- Coordenacao: cadastra disciplinas e professores, oferta turmas (monta a grade).
+- Aluno: ve as ofertas, se matricula e cancela. Escolha um aluno na tela de login.
+
+
+CASOS DE USO
+------------
+UC01 - Manter disciplinas (listar, cadastrar, editar, excluir) -> tela Disciplinas
+UC02 - Ofertar turma (valida RN01, RN02, RN07)                 -> tela Ofertar turma
+UC03 - Realizar matricula (valida RN03-RN06)                   -> tela Ofertas (aluno)
+UC04 - Minha grade / cancelar                                  -> tela Minha grade (aluno)
+UC05 - Manter professores (extra)                              -> tela Professores
+UC06 - Detalhe da turma e alunos matriculados (extra)          -> botao "Detalhe" na grade
+
+
+REGRAS DE NEGOCIO (validadas no front E no Express)
+---------------------------------------------------
+RN01 - Professor nao tem duas turmas no mesmo horario
+RN02 - Professor nao passa da carga maxima (o form sugere o de menor carga)
+RN03 - Aluno so se matricula se cursou todos os pre-requisitos
+RN04 - Aluno nao tem duas turmas no mesmo horario
+RN05 - Nao ha matricula em turma lotada
+RN06 - Aluno nao se matricula duas vezes na mesma disciplina
+RN07 - Horario valido: dia 2-7 e turno 1-3
+
+CODIGO DO HORARIO (2 digitos)
+- 1o digito = dia:  2=Seg, 3=Ter, 4=Qua, 5=Qui, 6=Sex, 7=Sab
+- 2o digito = turno: 1=Manha, 2=Tarde, 3=Noite
+  (ex.: "21" = Terca de manha)
+
+
+COMO VER OS BLOQUEIOS (dados de teste ja vem prontos)
+-----------------------------------------------------
+- Bruno Lima: tentar matricular em ALG2 -> "Falta pre-requisito: Algoritmos I" (RN03)
+- Ana Souza: ja esta em Front-end (horario 21); matricular em ALG2 (tambem 21)
+  -> "Conflito com a turma X" (RN04)
+- Turma de ALG2 tem 2 vagas: depois de 2 matriculas -> "Turma lotada" (RN05)
+
+
+ROTAS DA API (so GET e POST)
+----------------------------
+GET  /dados                 -> devolve tudo
+POST /disciplinas           -> cria ou edita (se vier id)
+POST /disciplinas/excluir   -> exclui se nao houver turma usando
+POST /professores           -> cria professor
+POST /turmas                -> valida RN01, RN02, RN07 e cria
+POST /turmas/excluir        -> exclui se nao houver matriculados
+POST /matriculas            -> valida RN03-RN06 e cria
+POST /matriculas/cancelar   -> remove a matricula
+
+
+TECNOLOGIAS USADAS
+------------------
+React (create-react-app) com componentes de classe, JSX, state/setState,
+componentDidMount, eventos (onClick/onChange/onSubmit/preventDefault),
+listas com .map()+key, formularios controlados, renderizacao condicional,
+composicao com props.children (Card), Error Boundary, Context (createContext),
+fetch + .then() + JSON.stringify. Back-end Node + Express + cors, com fs
+(readFileSync/writeFileSync) gravando em dados.json. Layout com Bootstrap (CDN).
