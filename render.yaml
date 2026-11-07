@@ -16,10 +16,7 @@ services:
     staticPublishPath: ./build
     envVars:
       - key: REACT_APP_API_URL
-        fromService:
-          name: matriculas-backend
-          type: web
-          property: host
+        value: https://matriculas-backend-7eer.onrender.com
     routes:
       - type: rewrite
         source: /*
